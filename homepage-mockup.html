@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nirav Saxena — homepage mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,450;0,9..144,560;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; }
+
+  #site[data-theme="dark"] {
+    --bg: #0A0A0A;
+    --surface: #151512;
+    --text: #F5F4EF;
+    --text-secondary: #A8A69C;
+    --border: #2A2A26;
+    --accent: #FFD100;
+    --accent-ink: #0A0A0A;
+    --accent-wash: rgba(255,209,0,0.26);
+    --sky: #12141C;
+  }
+  #site[data-theme="light"] {
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --text: #14141A;
+    --text-secondary: #6B6A63;
+    --border: #E4E2DA;
+    --accent: #2E4AE0;
+    --accent-ink: #FFFFFF;
+    --accent-wash: rgba(46,74,224,0.13);
+    --sky: #BFE0F5;
+  }
+
+  #site {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background .3s ease, color .3s ease;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+
+  /* nav */
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--border); transition: background .3s ease, border-color .3s ease; }
+  .nav-inner { max-width: 980px; margin: 0 auto; padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .wordmark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color .2s ease; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* day/night toggle: large moon+stars (night) <-> sun+cloud (day) */
+  .theme-toggle { width: 60px; height: 30px; border-radius: 16px; position: relative; padding: 0; cursor: pointer; overflow: hidden; background: #1E1D1B; border: 1.5px solid rgba(255,255,255,.14); transition: background .4s ease, border-color .4s ease, border-width .4s ease; }
+  #site[data-theme="light"] .theme-toggle { background: #BFE0F5; border: 3px solid #4E9BAA; }
+  .theme-toggle .scene { position: absolute; top: 0; left: 0; transition: opacity .45s ease, transform .45s ease; }
+  .theme-toggle .scene-day { opacity: 0; transform: translateX(-8px); }
+  .theme-toggle .scene-night { opacity: 1; transform: translateX(0); }
+  #site[data-theme="light"] .theme-toggle .scene-day { opacity: 1; transform: translateX(0); }
+  #site[data-theme="light"] .theme-toggle .scene-night { opacity: 0; transform: translateX(8px); }
+
+  .eyebrow { font-size: 13px; letter-spacing: 0.02em; color: var(--text-secondary); margin-bottom: 16px; }
+
+  /* hero */
+  .hero { padding: 120px 0 100px; }
+  .name { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(48px, 8vw, 80px); letter-spacing: -0.02em; line-height: 1.02; margin-bottom: 32px; }
+  .hero-primary { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(22px, 3vw, 30px); line-height: 1.5; max-width: 760px; margin-bottom: 24px; }
+  .hero-secondary { font-size: 16px; color: var(--text-secondary); line-height: 1.7; max-width: 660px; }
+  .mark { background-image: linear-gradient(var(--accent-wash), var(--accent-wash)); background-repeat: no-repeat; background-size: 0% 100%; border-radius: 3px; padding: 0 .12em; transition: background-size .9s ease; }
+  .mark.in { background-size: 100% 100%; }
+  .hero-cta { margin-top: 38px; display: flex; gap: 14px; }
+  .btn { font-size: 14px; font-weight: 500; padding: 12px 22px; border-radius: 8px; text-decoration: none; display: inline-block; transition: opacity .2s ease; border: none; cursor: pointer; }
+  .btn:hover { opacity: 0.85; }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--text); background: none; }
+
+  section { padding: 96px 0; border-top: 1px solid var(--border); transition: border-color .3s ease; }
+  h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 36px; margin-bottom: 12px; letter-spacing: -0.01em; }
+  .section-note { font-size: 13px; color: var(--text-secondary); font-style: italic; margin-bottom: 40px; }
+
+  /* philosophy — true one-after-another masked reveal */
+  .phil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 36px; }
+  .phil-card h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 18px; margin-bottom: 10px; }
+  .phil-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+  .reveal-mask { display: block; overflow: hidden; }
+  .reveal-inner { display: block; transform: translateY(115%); opacity: 0; transition: transform .8s cubic-bezier(.16,.84,.44,1), opacity .6s ease; transition-delay: var(--d, 0s); }
+  .phil-grid.in-view .reveal-inner { transform: translateY(0); opacity: 1; }
+  .reveal-mask.title .reveal-inner { --d: calc(var(--stagger, 0s) + 0s); }
+  .reveal-mask.body .reveal-inner { --d: calc(var(--stagger, 0s) + 0.15s); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-inner { transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
+
+  /* work — two-column editorial cards */
+  .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 36px; }
+  .work-card { display: block; text-decoration: none; color: var(--text); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color .2s ease, transform .2s ease; }
+  .work-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .work-card-image { width: 100%; height: 190px; }
+  .work-card-body { padding: 26px; }
+  .work-card-body h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; margin-bottom: 18px; line-height: 1.2; }
+  .work-card-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+  .work-card-footer { display: flex; justify-content: space-between; gap: 20px; }
+  .work-card-desc p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+  .work-card-client { font-style: italic; font-size: 13px; }
+  .work-card-stats { display: flex; flex-direction: column; gap: 14px; flex-shrink: 0; text-align: right; }
+  .stat-num { display: block; font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; }
+  .stat-label { display: block; font-size: 11px; color: var(--text-secondary); }
+
+  /* contact footer */
+  .contact-line { font-size: 16px; color: var(--text-secondary); line-height: 1.6; max-width: 540px; margin-bottom: 28px; }
+  .footer-links { display: flex; gap: 12px; margin-bottom: 44px; }
+  .copyright { font-size: 12px; color: var(--text-secondary); }
+
+  @media (max-width: 720px) {
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-resume) { display: none; }
+    .phil-grid, .work-grid { grid-template-columns: 1fr; }
+    .work-card-footer { flex-direction: column; }
+    .work-card-stats { flex-direction: row; text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div id="site" data-theme="dark">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="wordmark" href="#top">Nirav Saxena</a>
+      <div class="nav-links">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+        <a href="#" class="nav-resume">Resume ↗</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light mode">
+        <svg class="scene scene-day" viewBox="0 0 60 30" width="60" height="30">
+          <circle cx="44" cy="15" r="10" fill="#F5D93A" stroke="#E0A93A" stroke-width="1.5"/>
+          <path d="M28 19c-2.2 0-4-1.6-4-3.6 0-1.8 1.4-3.3 3.2-3.6.5-1.6 2-2.8 3.8-2.8 2.1 0 3.9 1.6 4.1 3.7 2 .2 3.6 1.8 3.6 3.7 0 1.4-1 2.6-2.3 2.6H28z" fill="#fff" stroke="#B8C4C8" stroke-width="1"/>
+        </svg>
+        <svg class="scene scene-night" viewBox="0 0 60 30" width="60" height="30">
+          <circle cx="16" cy="15" r="11" fill="#E8E4B8"/>
+          <circle cx="12" cy="10" r="2.4" fill="#C9C48F" opacity=".7"/>
+          <circle cx="19" cy="12" r="1.8" fill="#C9C48F" opacity=".7"/>
+          <circle cx="14" cy="19" r="2" fill="#C9C48F" opacity=".7"/>
+          <circle cx="34" cy="9" r="1.6" fill="#fff"/>
+          <circle cx="44" cy="8" r="1.3" fill="#fff"/>
+          <circle cx="39" cy="15" r="1" fill="#fff"/>
+          <circle cx="49" cy="16" r="2" fill="#fff"/>
+          <circle cx="42" cy="22" r="1.2" fill="#fff"/>
+          <circle cx="52" cy="21" r="1.4" fill="#fff"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="hero wrap" id="top">
+    <h1 class="name">Nirav Saxena</h1>
+    <p class="hero-primary">I'm a professional over-thinker who turns coffee into <span class="mark">user insights</span> and random observations into <span class="mark">research hypotheses</span>. I love diving deep into user behavior, but equally excited to chat about why we all have 200 apps but only use 5, or whether dark mode actually saves your eyes or just makes you feel cooler.</p>
+    <p class="hero-secondary">I'm a UX researcher with 4+ years of experience and a background in psychotherapy. I blend my understanding of human behavior and my connection-building skills to uncover meaningful insights that drive product decisions.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">View my work</a>
+      <a href="#" class="btn btn-ghost">Resume ↗</a>
+    </div>
+  </header>
+
+  <section class="wrap" id="philosophy">
+    <p class="eyebrow">My philosophy</p>
+    <h2>Three things I carry from psychology into research</h2>
+    <p class="section-note">Draft copy — placeholder titles, to be written properly together. Scroll down and watch them arrive one at a time.</p>
+    <div class="phil-grid">
+      <div class="phil-card" style="--stagger:0s">
+        <h3><span class="reveal-mask title"><span class="reveal-inner">Meeting people where they are</span></span></h3>
+        <p><span class="reveal-mask body"><span class="reveal-inner">Good research adapts to the person in front of you — their language, their context, their pace — rather than asking them to adapt to the study.</span></span></p>
+      </div>
+      <div class="phil-card" style="--stagger:0.9s">
+        <h3><span class="reveal-mask title"><span class="reveal-inner">Behaviour over opinion</span></span></h3>
+        <p><span class="reveal-mask body"><span class="reveal-inner">What people say they'd do and what they actually do rarely match. Psychology trained me to watch for the gap, not just record the quote.</span></span></p>
+      </div>
+      <div class="phil-card" style="--stagger:1.8s">
+        <h3><span class="reveal-mask title"><span class="reveal-inner">Empathy is a method, not a mood</span></span></h3>
+        <p><span class="reveal-mask body"><span class="reveal-inner">Connection isn't a soft skill I bring alongside the research — it's the instrument. Trust is what gets someone to tell you the truth.</span></span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="work">
+    <p class="eyebrow">Selected work</p>
+    <h2>Case studies</h2>
+    <p class="section-note">Placeholder image blocks — real prototype visuals go here.</p>
+    <div class="work-grid">
+      <a class="work-card" href="#">
+        <div class="work-card-image" style="background:linear-gradient(135deg,#3B4A6B,#1D2436);"></div>
+        <div class="work-card-body">
+          <h3>Vehicle Asset Management redesign</h3>
+          <div class="work-card-divider"></div>
+          <div class="work-card-footer">
+            <div class="work-card-desc">
+              <p>Two research phases and a tested AI-chat concept — until users made it clear the plain dashboard was what they actually wanted.</p>
+              <p class="work-card-client">BT Group / Openreach</p>
+            </div>
+            <div class="work-card-stats">
+              <div><span class="stat-num">17</span><span class="stat-label">interviews</span></div>
+              <div><span class="stat-num">3</span><span class="stat-label">user roles</span></div>
+              <div><span class="stat-num">2</span><span class="stat-label">research phases</span></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a class="work-card" href="#">
+        <div class="work-card-image" style="background:linear-gradient(135deg,#C9A227,#6E4E10);"></div>
+        <div class="work-card-body">
+          <h3>Allowance Audit Tool</h3>
+          <div class="work-card-divider"></div>
+          <div class="work-card-footer">
+            <div class="work-card-desc">
+              <p>A one-week sprint that helped surface incorrectly paid allowances across the whole manager population.</p>
+              <p class="work-card-client">BT Group</p>
+            </div>
+            <div class="work-card-stats">
+              <div><span class="stat-num">700+</span><span class="stat-label">managers</span></div>
+              <div><span class="stat-num">94%</span><span class="stat-label">coverage</span></div>
+              <div><span class="stat-num">£500K+</span><span class="stat-label">savings found</span></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a class="work-card" href="#">
+        <div class="work-card-image" style="background:linear-gradient(135deg,#3F7D4C,#173420);"></div>
+        <div class="work-card-body">
+          <h3>Cropwise Grower</h3>
+          <div class="work-card-divider"></div>
+          <div class="work-card-footer">
+            <div class="work-card-desc">
+              <p>Remote usability testing with farmers across three countries, moderated through a translator workshop built from scratch.</p>
+              <p class="work-card-client">Syngenta · Lollypop Design Studio</p>
+            </div>
+            <div class="work-card-stats">
+              <div><span class="stat-num">17</span><span class="stat-label">growers</span></div>
+              <div><span class="stat-num">3</span><span class="stat-label">countries</span></div>
+              <div><span class="stat-num">497K+</span><span class="stat-label">regional users</span></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="wrap" id="contact">
+    <p class="eyebrow">Get in touch</p>
+    <h2>Let's talk</h2>
+    <p class="contact-line">Got a project, a question, or just want to talk shop about UX research? I'd love to hear from you.</p>
+    <div class="footer-links">
+      <a href="mailto:hello@niravsaxena.com" class="btn btn-primary">Email me</a>
+      <a href="#" class="btn btn-ghost">LinkedIn ↗</a>
+    </div>
+    <p class="copyright">© 2026 Nirav Saxena</p>
+  </footer>
+
+</div>
+<script>
+  const site = document.getElementById('site');
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    site.setAttribute('data-theme', site.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('.mark').forEach((el, i) => {
+      setTimeout(() => el.classList.add('in'), i * 220);
+    });
+  }, 350);
+
+  const philGrid = document.querySelector('.phil-grid');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        philGrid.classList.add('in-view');
+        obs.unobserve(philGrid);
+      }
+    });
+  }, { threshold: 0.25 });
+  obs.observe(philGrid);
+</script>
+</body>
+</html>

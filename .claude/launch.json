@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nirav-portfolio-dev",
+      "runtimeExecutable": "/Users/nachos/Desktop/Resume and Portfolio/2026 Portfolio prep/nirav_portfolio/.claude/dev-server.sh",
+      "runtimeArgs": [],
+      "port": 3000
+    }
+  ]
+}

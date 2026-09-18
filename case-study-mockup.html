@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vehicle Asset Management Redesign — case study mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,450;0,9..144,560;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; }
+
+  #site[data-theme="dark"] {
+    --bg: #0A0A0A; --surface: #151512; --text: #F5F4EF; --text-secondary: #A8A69C;
+    --border: #2A2A26; --accent: #FFD100; --accent-ink: #0A0A0A; --accent-wash: rgba(255,209,0,0.26);
+  }
+  #site[data-theme="light"] {
+    --bg: #FAFAF9; --surface: #FFFFFF; --text: #14141A; --text-secondary: #6B6A63;
+    --border: #E4E2DA; --accent: #2E4AE0; --accent-ink: #FFFFFF; --accent-wash: rgba(46,74,224,0.13);
+  }
+  #site { background: var(--bg); color: var(--text); min-height: 100vh; transition: background .3s ease, color .3s ease; padding-bottom: 3px; }
+
+  /* nav (shared component) */
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--border); transition: background .3s ease, border-color .3s ease; }
+  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .wordmark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; color: var(--text); text-decoration: none; }
+  .nav-left { display: flex; align-items: center; gap: 18px; }
+  .back-link { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color .2s ease; }
+  .back-link:hover { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color .2s ease; }
+  .nav-links a:hover { color: var(--text); }
+  .theme-toggle { width: 60px; height: 30px; border-radius: 16px; position: relative; padding: 0; cursor: pointer; overflow: hidden; background: #1E1D1B; border: 1.5px solid rgba(255,255,255,.14); transition: background .4s ease, border-color .4s ease, border-width .4s ease; }
+  #site[data-theme="light"] .theme-toggle { background: #BFE0F5; border: 3px solid #4E9BAA; }
+  .theme-toggle .scene { position: absolute; top: 0; left: 0; transition: opacity .45s ease, transform .45s ease; }
+  .theme-toggle .scene-day { opacity: 0; transform: translateX(-8px); }
+  .theme-toggle .scene-night { opacity: 1; transform: translateX(0); }
+  #site[data-theme="light"] .theme-toggle .scene-day { opacity: 1; transform: translateX(0); }
+  #site[data-theme="light"] .theme-toggle .scene-night { opacity: 0; transform: translateX(8px); }
+
+  /* case study layout */
+  .case-layout { max-width: 1180px; margin: 0 auto; padding: 56px 32px 90px; display: flex; gap: 64px; align-items: flex-start; }
+
+  .case-nav { position: sticky; top: 96px; width: 190px; flex-shrink: 0; }
+  .case-nav-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; letter-spacing: .02em; }
+  .case-nav a { display: block; padding: 7px 0 7px 16px; font-size: 13px; color: var(--text-secondary); text-decoration: none; border-left: 2px solid var(--border); transition: color .2s ease, border-color .2s ease; }
+  .case-nav a.active { color: var(--text); border-left-color: var(--accent); font-weight: 500; }
+
+  .case-content { flex: 1; max-width: 720px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 56px 60px; }
+  .case-eyebrow { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; }
+  .case-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 18px; }
+  .case-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 44px; padding-bottom: 44px; border-bottom: 1px solid var(--border); }
+  .case-meta span:not(:last-child)::after { content: "·"; margin: 0 8px; }
+
+  .case-section { padding: 40px 0; border-top: 1px solid var(--border); }
+  .case-section:first-of-type { padding-top: 0; border-top: none; }
+  .case-section h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; margin-bottom: 18px; letter-spacing: -0.01em; }
+  .case-section p { font-size: 15.5px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 16px; }
+  .case-section p:last-child { margin-bottom: 0; }
+  .case-section ul { margin: 0 0 16px 20px; }
+  .case-section li { font-size: 15.5px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 6px; }
+  .case-section strong { color: var(--text); font-weight: 500; }
+  .mark { background-image: linear-gradient(var(--accent-wash), var(--accent-wash)); background-repeat: no-repeat; background-size: 0% 100%; border-radius: 3px; padding: 0 .1em; transition: background-size .9s ease; }
+  .mark.in { background-size: 100% 100%; }
+  .proto-note { font-style: italic; color: var(--text-secondary); font-size: 14px; padding: 16px 18px; border: 1px dashed var(--border); border-radius: 10px; }
+
+  .section-tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 11px; border-radius: 12px; background: var(--accent-wash); color: var(--accent); margin-bottom: 16px; letter-spacing: .01em; }
+  .stats-strip { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 44px; padding-bottom: 44px; border-bottom: 1px solid var(--border); }
+  .stat-block .num { display: block; font-family: 'Fraunces', serif; font-weight: 700; font-size: 26px; color: var(--accent); }
+  .stat-block .lbl { display: block; font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+  .pull-quote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 22px; line-height: 1.5; color: var(--text); border-left: 3px solid var(--accent); padding: 2px 0 2px 22px; margin: 22px 0; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0; }
+  .compare-card { padding: 16px 18px; border-radius: 12px; border: 1px solid var(--border); }
+  .compare-card.became { border-color: var(--accent); background: var(--accent-wash); }
+  .compare-card .compare-label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+  .compare-card .compare-value { font-family: 'Fraunces', serif; font-size: 15.5px; font-weight: 500; }
+  .accent-num { color: var(--accent); font-weight: 500; }
+
+  .case-footer-nav { max-width: 720px; margin: 40px 0 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .case-footer-nav a { text-decoration: none; color: var(--text-secondary); font-size: 14px; transition: color .2s ease; }
+  .case-footer-nav a:hover { color: var(--accent); }
+  .case-footer-nav .next-link { text-align: right; }
+  .case-footer-nav .nav-label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+  .case-footer-nav .nav-title { font-family: 'Fraunces', serif; font-size: 17px; color: var(--text); }
+
+  /* scroll progress bar */
+  .progress-bar { position: fixed; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--border); z-index: 20; }
+  .progress-fill { height: 100%; width: 0%; background: var(--accent); transition: width .1s linear; }
+
+  @media (max-width: 860px) {
+    .case-layout { flex-direction: column; }
+    .case-nav { display: none; }
+    .case-content { padding: 36px 28px; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div id="site" data-theme="dark">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a class="wordmark" href="#">Nirav Saxena</a>
+        <a class="back-link" href="#">← All work</a>
+      </div>
+      <div class="nav-links">
+        <a href="#">Resume ↗</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light mode">
+        <svg class="scene scene-day" viewBox="0 0 60 30" width="60" height="30">
+          <circle cx="44" cy="15" r="10" fill="#F5D93A" stroke="#E0A93A" stroke-width="1.5"/>
+          <path d="M28 19c-2.2 0-4-1.6-4-3.6 0-1.8 1.4-3.3 3.2-3.6.5-1.6 2-2.8 3.8-2.8 2.1 0 3.9 1.6 4.1 3.7 2 .2 3.6 1.8 3.6 3.7 0 1.4-1 2.6-2.3 2.6H28z" fill="#fff" stroke="#B8C4C8" stroke-width="1"/>
+        </svg>
+        <svg class="scene scene-night" viewBox="0 0 60 30" width="60" height="30">
+          <circle cx="16" cy="15" r="11" fill="#E8E4B8"/>
+          <circle cx="12" cy="10" r="2.4" fill="#C9C48F" opacity=".7"/>
+          <circle cx="19" cy="12" r="1.8" fill="#C9C48F" opacity=".7"/>
+          <circle cx="14" cy="19" r="2" fill="#C9C48F" opacity=".7"/>
+          <circle cx="34" cy="9" r="1.6" fill="#fff"/>
+          <circle cx="44" cy="8" r="1.3" fill="#fff"/>
+          <circle cx="39" cy="15" r="1" fill="#fff"/>
+          <circle cx="49" cy="16" r="2" fill="#fff"/>
+          <circle cx="42" cy="22" r="1.2" fill="#fff"/>
+          <circle cx="52" cy="21" r="1.4" fill="#fff"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="case-layout">
+    <aside class="case-nav">
+      <p class="case-nav-label">On this page</p>
+      <a href="#context" class="case-link">Context</a>
+      <a href="#discovery" class="case-link">Discovery</a>
+      <a href="#usability" class="case-link">Usability testing</a>
+      <a href="#twist" class="case-link">The plot twist</a>
+      <a href="#prototype" class="case-link">Prototype</a>
+      <a href="#impact" class="case-link">Impact</a>
+      <a href="#reflection" class="case-link">Reflection</a>
+    </aside>
+
+    <main class="case-content">
+      <p class="case-eyebrow">Case study</p>
+      <h1 class="case-title">Vehicle Asset Management redesign</h1>
+      <p class="case-meta"><span>BT Group / Openreach</span><span>UX Research</span><span>Paused — funding, resuming in ~6 months</span></p>
+
+      <div class="stats-strip">
+        <div class="stat-block"><span class="num">3</span><span class="lbl">user roles interviewed</span></div>
+        <div class="stat-block"><span class="num">2</span><span class="lbl">research phases</span></div>
+        <div class="stat-block"><span class="num">17</span><span class="lbl">discovery interviews</span></div>
+        <div class="stat-block"><span class="num">6 wks</span><span class="lbl">total research time</span></div>
+      </div>
+
+      <section class="case-section" id="context">
+        <span class="section-tag">The problem</span>
+        <h2>The tool nobody trusted</h2>
+        <p>Openreach engineers — the people who go out and physically repair connections — get assigned a vehicle to do that job. Managing thousands of those vehicles across BT and Openreach fell to a tool called eOrg: an interface that hadn't been meaningfully updated in years, originally built to track every kind of company asset from laptops to vans.</p>
+        <p>eOrg handled allocation, reassignment, and location updates. Everything else — service bookings, repairs, daily vehicle checks — lived in Holman, the platform provided by the company's vehicle leasing partner. Fleet Managers had learned not to trust eOrg's data, so they defaulted to Holman even for the handful of things eOrg was supposed to own. <span class="mark">A tool nobody trusts gets used less</span>, which only made the data staler.</p>
+        <p>The asset management team brought me in with an open brief: understand what's actually broken, and build the case for whether it's worth fixing.</p>
+      </section>
+
+      <section class="case-section" id="discovery">
+        <span class="section-tag">Research</span>
+        <h2>Phase 1 — understanding who actually touches this system</h2>
+        <p>I ran a <span class="accent-num">3-week</span> discovery study with in-depth interviews across three groups — Patch Managers, Fleet leads, and Engineers/Drivers — digging into current workflows, pain points, and <span class="mark">what information actually mattered</span> for their decisions.</p>
+        <ul>
+          <li>Allocation and relocation information was scattered across eOrg, Holman, and a third "parking at home" tool</li>
+          <li>Vehicles regularly went "stuck" — unallocated, with no traceable owner</li>
+          <li>Inconsistent parking data caused service bookings far from where the engineer actually was</li>
+        </ul>
+      </section>
+
+      <section class="case-section" id="usability">
+        <span class="section-tag">Testing</span>
+        <h2>Phase 2 — testing the answer, not just the problem</h2>
+        <p>Design took those findings and built a to-be concept centered on an AI chat assistant as the primary interaction, with the dashboard kept as a fallback layer. I tested that concept over another <span class="accent-num">3-week</span> round with Patch Managers and Drivers, watching for findability, understandability, and satisfaction.</p>
+        <p>A "set as home location" checkbox, for instance, meant something different to nearly every Patch Manager who used it — <span class="mark">labels and structure didn't always match expectations</span>. But where the flow did match, people moved faster and more confidently than they ever had on eOrg.</p>
+      </section>
+
+      <section class="case-section" id="twist">
+        <span class="section-tag">Key finding</span>
+        <h2>The plot twist</h2>
+        <p>Here's the part that made this project a strategy story rather than just a usability report.</p>
+        <blockquote class="pull-quote">"Users preferred the plain dashboard over the AI chat."</blockquote>
+        <p>Given the choice, people wanted information at a glance, not a conversation to have with a system before they could even see it. That single finding reshaped the whole project.</p>
+        <div class="compare-grid">
+          <div class="compare-card"><span class="compare-label">What we built first</span><span class="compare-value">AI chat as the primary interaction</span></div>
+          <div class="compare-card became"><span class="compare-label">What shipped instead</span><span class="compare-value">A fast, clear dashboard</span></div>
+        </div>
+        <p>The chat feature got deprioritized, freeing up budget for a fast, clear dashboard and automatic vehicle transfer when someone leaves a role.</p>
+      </section>
+
+      <section class="case-section" id="prototype">
+        <span class="section-tag">Design</span>
+        <h2>What the prototype actually did</h2>
+        <p>The final design included a dashboard with assigned vehicles and recent activity, a vehicle list with per-vehicle transfer/amend actions, a transfer-request flow, and a manager-facing review screen with a visible before/after record.</p>
+        <p class="proto-note">Interactive, non-confidential recreation of this flow goes here once built.</p>
+      </section>
+
+      <section class="case-section" id="impact">
+        <span class="section-tag">Outcome</span>
+        <h2>Where it stands</h2>
+        <p>Before the project paused, the concept and prototype were validated with real users across all three groups. It's currently on hold pending funding, with a build phase expected to start in roughly <span class="accent-num">six months</span>.</p>
+      </section>
+
+      <section class="case-section" id="reflection">
+        <span class="section-tag">Reflection</span>
+        <h2>What I'd do differently</h2>
+        <p>I'd push harder, earlier, for a clear funding roadmap before scoping the full vision — shaping a smaller proof-of-concept that could ship and prove value on its own, rather than designing the complete picture and losing momentum when the bigger ask stalled.</p>
+      </section>
+    </main>
+  </div>
+
+  <div class="wrap-footer-nav" style="max-width:1180px; margin:0 auto; padding:0 32px 90px;">
+    <div class="case-footer-nav" style="max-width:720px; margin-left:254px;">
+      <a href="#">← All case studies</a>
+      <a href="#" class="next-link"><span class="nav-label">Next case study</span><span class="nav-title">Allowance Audit Tool →</span></a>
+    </div>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<script>
+  const site = document.getElementById('site');
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    site.setAttribute('data-theme', site.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('.mark').forEach((el) => el.classList.add('in'));
+  }, 400);
+
+  const sections = document.querySelectorAll('.case-section');
+  const links = document.querySelectorAll('.case-link');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const link = document.querySelector('.case-link[href="#' + entry.target.id + '"]');
+      if (entry.isIntersecting) {
+        links.forEach((l) => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach((s) => spy.observe(s));
+
+  const fill = document.getElementById('progressFill');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    fill.style.width = scrolled + '%';
+  });
+</script>
+</body>
+</html>
