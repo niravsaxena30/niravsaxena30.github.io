@@ -94,6 +94,9 @@ export default function ImageCarousel({
                 alt={slide.alt}
                 className="carousel-trigger"
                 onOpenChange={setLightboxOpen}
+                slides={slides}
+                index={index}
+                onIndexChange={go}
               >
                 <Image
                   src={slide.src}

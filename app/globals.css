@@ -669,6 +669,59 @@ footer.wrap {
   border-radius: 12px;
   transition: transform 0.3s ease;
 }
+.lightbox-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-media {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* slide set: arrows, counter and caption */
+.lightbox-slides .lightbox-media {
+  /* fixed width keeps the arrows in the same place on every slide */
+  width: 85vw;
+}
+.lightbox-slides .lightbox-frame,
+.lightbox-slides .lightbox-image {
+  /* leave room below the image for the caption and counter */
+  max-height: calc(85vh - 52px);
+}
+.lightbox-slides .lightbox-media,
+.lightbox-slides .lightbox-frame {
+  touch-action: pan-y pinch-zoom;
+}
+.lightbox-zoomed .lightbox-media,
+.lightbox-zoomed .lightbox-frame {
+  /* zoomed: let a drag pan the image instead of being read as a swipe */
+  touch-action: auto;
+}
+.lightbox-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 12px;
+  max-width: 85vw;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.88);
+}
+.lightbox-media .lightbox-arrow {
+  /* same look as the carousel arrows, with a light ring so the circle still
+     reads against the dark backdrop in dark theme */
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.lightbox-counter {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.6);
+}
 @keyframes lightbox-fade-in {
   from {
     opacity: 0;
@@ -732,7 +785,8 @@ footer.wrap {
   width: 100%;
   height: 100%;
 }
-.carousel-arrow {
+.carousel-arrow,
+.lightbox-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -751,22 +805,27 @@ footer.wrap {
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
-.carousel-arrow-prev {
+.carousel-arrow-prev,
+.lightbox-arrow-prev {
   left: 10px;
 }
-.carousel-arrow-next {
+.carousel-arrow-next,
+.lightbox-arrow-next {
   right: 10px;
 }
-.carousel-arrow:hover {
+.carousel-arrow:hover,
+.lightbox-arrow:hover {
   color: var(--accent);
   border-color: var(--accent);
 }
-.carousel-arrow[aria-disabled="true"] {
+.carousel-arrow[aria-disabled="true"],
+.lightbox-arrow[aria-disabled="true"] {
   opacity: 0.35;
   cursor: default;
   pointer-events: none;
 }
 .carousel-arrow:focus-visible,
+.lightbox-arrow:focus-visible,
 .carousel-dot:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -824,14 +883,17 @@ footer.wrap {
   background: var(--accent);
 }
 @media (max-width: 640px) {
-  .carousel-arrow {
+  .carousel-arrow,
+  .lightbox-arrow {
     width: 32px;
     height: 32px;
   }
-  .carousel-arrow-prev {
+  .carousel-arrow-prev,
+  .lightbox-arrow-prev {
     left: 6px;
   }
-  .carousel-arrow-next {
+  .carousel-arrow-next,
+  .lightbox-arrow-next {
     right: 6px;
   }
 }
