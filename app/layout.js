@@ -1,5 +1,4 @@
 import { Fraunces, Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -59,10 +58,7 @@ export default function RootLayout({ children }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
-      <body suppressHydrationWarning>
-        {children}
-        <Analytics />
-      </body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
