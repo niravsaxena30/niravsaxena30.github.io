@@ -60,7 +60,10 @@ export default function CaseStudyShell({
       <div className="case-layout">
         <aside className="case-nav">
           <Link className="back-link case-back-link" href="/#work">
-            ← Back
+            <span className="back-arrow" aria-hidden="true">
+              ←
+            </span>
+            Back
           </Link>
           <p className="case-nav-label">On this page</p>
           {tocItems.map((item) => (

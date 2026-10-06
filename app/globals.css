@@ -447,10 +447,6 @@ footer.wrap {
 .back-link:hover {
   color: var(--accent);
 }
-.case-back-link {
-  display: block;
-  margin-bottom: 22px;
-}
 
 /* case study layout */
 .case-layout {
@@ -487,6 +483,44 @@ footer.wrap {
   color: var(--text);
   border-left-color: var(--accent);
   font-weight: 500;
+}
+
+/* Back link: set apart from the "On this page" list. No bar or indent (both
+   come from .case-nav a), so it sits flush with the sidebar's left edge;
+   larger than the section links and in the primary text colour. */
+.case-nav .case-back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: 40px;
+  padding: 0;
+  border-left: 0;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--text);
+}
+.case-nav .case-back-link:hover {
+  color: var(--text);
+}
+.case-nav .case-back-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.back-arrow {
+  display: inline-block;
+  font-size: 1.3em;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+.case-back-link:hover .back-arrow,
+.case-back-link:focus-visible .back-arrow {
+  transform: translateX(-4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .back-arrow {
+    transition: none;
+  }
 }
 
 .case-content {
