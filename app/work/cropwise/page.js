@@ -305,7 +305,7 @@ export default function CropwiseCaseStudy() {
         <Lightbox
           className="case-image"
           src="/cropwise-pest-scan-flow.png"
-          alt="Cropwise Grower: home screen, disease scanner, diagnosis result, and product recommendation"
+          alt="Four Cropwise Grower screens side by side: the home screen, the camera scanner for crop diseases, a diagnosis result for a scanned plant, and the same diagnosis screen further down with a recommended product to treat it."
         />
 
         <p>
@@ -317,7 +317,7 @@ export default function CropwiseCaseStudy() {
         <Lightbox
           className="case-image"
           src="/cropwise-onboarding-flow.png"
-          alt="Cropwise Grower onboarding flow"
+          alt="Five Cropwise Grower onboarding screens: two illustrated intro slides (scan and diagnose, shop for products), choosing a language, signing up with a name and mobile number, and verifying with a one-time code."
         />
 
         <p>
@@ -328,7 +328,7 @@ export default function CropwiseCaseStudy() {
         <Lightbox
           className="case-image"
           src="/cropwise-home-shop-flow.png"
-          alt="Cropwise Grower services grid and shop screen"
+          alt="Two Cropwise Grower screens: the Our Services grid, with shops near me, seeds, crop protection, farm area calculation, product scan and a seed calculator, and the shop screen for browsing by retailer or category and adding products to the cart."
         />
       </section>
 
