@@ -1,9 +1,31 @@
 import CaseStudyShell from "../../components/CaseStudyShell";
 
+const TITLE = "Case study: The tool nobody trusted";
+const DESCRIPTION =
+  "Two research phases and a tested AI-chat concept, until users made it clear the plain dashboard was what they actually wanted.";
+const SHARE_IMAGE = {
+  url: "/work/vms.jpg",
+  width: 1600,
+  height: 865,
+  alt: TITLE,
+};
+
 export const metadata = {
-  title: { absolute: "Case study: The tool nobody trusted" },
-  description:
-    "Two research phases and a tested AI-chat concept, until users made it clear the plain dashboard was what they actually wanted.",
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "Nirav Saxena",
+    type: "website",
+    images: [SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [SHARE_IMAGE],
+  },
 };
 
 const TOC = [

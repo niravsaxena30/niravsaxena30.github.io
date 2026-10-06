@@ -1,10 +1,32 @@
 import CaseStudyShell from "../../components/CaseStudyShell";
 import Lightbox from "../../components/Lightbox";
 
+const TITLE = "Case study: A one-stop app for farmers who'd never used one";
+const DESCRIPTION =
+  "Remote usability testing with farmers in Indonesia, Thailand and Pakistan, moderated through a translator workshop built from scratch.";
+const SHARE_IMAGE = {
+  url: "/work/cropwise.jpg",
+  width: 1600,
+  height: 913,
+  alt: TITLE,
+};
+
 export const metadata = {
-  title: { absolute: "Case study: A one-stop app for farmers who'd never used one" },
-  description:
-    "Remote usability testing with farmers across three countries, moderated through a translator workshop built from scratch.",
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "Nirav Saxena",
+    type: "website",
+    images: [SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [SHARE_IMAGE],
+  },
 };
 
 const TOC = [

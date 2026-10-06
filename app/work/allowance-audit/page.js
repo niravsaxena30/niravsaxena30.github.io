@@ -1,10 +1,32 @@
 import CaseStudyShell from "../../components/CaseStudyShell";
 import ImageCarousel from "../../components/ImageCarousel";
 
+const TITLE = "Case study: A quiet problem, hiding in plain sight";
+const DESCRIPTION =
+  "A one-week sprint that surfaced incorrectly paid allowances across 700+ managers, with 94% coverage and £500K+ in savings identified.";
+const SHARE_IMAGE = {
+  url: "/work/allowance-audit.jpg",
+  width: 1600,
+  height: 1031,
+  alt: TITLE,
+};
+
 export const metadata = {
-  title: { absolute: "Case study: A quiet problem, hiding in plain sight" },
-  description:
-    "A one-week sprint that helped surface incorrectly paid allowances across the whole manager population.",
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "Nirav Saxena",
+    type: "website",
+    images: [SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [SHARE_IMAGE],
+  },
 };
 
 const TOC = [

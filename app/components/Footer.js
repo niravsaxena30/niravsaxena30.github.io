@@ -19,7 +19,9 @@ export default function Footer() {
           LinkedIn ↗
         </a>
       </div>
-      <p className="copyright">© With love, Nirav Saxena</p>
+      <p className="copyright">
+        © {new Date().getFullYear()} Nirav Saxena. With love.
+      </p>
     </footer>
   );
 }

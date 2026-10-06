@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const CASE_STUDIES = [
+export const CASE_STUDIES = [
   {
     href: "/work/vms",
     image: "/work/vms.jpg",
