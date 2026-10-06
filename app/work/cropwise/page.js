@@ -2,7 +2,7 @@ import CaseStudyShell from "../../components/CaseStudyShell";
 import Lightbox from "../../components/Lightbox";
 
 export const metadata = {
-  title: "Cropwise Grower | Nirav Saxena",
+  title: { absolute: "Case study: A one-stop app for farmers who'd never used one" },
   description:
     "Remote usability testing with farmers across three countries, moderated through a translator workshop built from scratch.",
 };

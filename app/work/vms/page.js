@@ -1,7 +1,7 @@
 import CaseStudyShell from "../../components/CaseStudyShell";
 
 export const metadata = {
-  title: "Vehicle Asset Management redesign | Nirav Saxena",
+  title: { absolute: "Case study: The tool nobody trusted" },
   description:
     "Two research phases and a tested AI-chat concept, until users made it clear the plain dashboard was what they actually wanted.",
 };

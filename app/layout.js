@@ -16,7 +16,10 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Hello world, I'm Nirav.",
+  title: {
+    default: "Nirav Saxena | UX Researcher",
+    template: "%s | Nirav Saxena",
+  },
   description:
     "UX researcher with 4+ years of experience and a background in psychotherapy, blending human behavior insight with connection-building to drive product decisions.",
 };

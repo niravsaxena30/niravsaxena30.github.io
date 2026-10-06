@@ -2,7 +2,7 @@ import CaseStudyShell from "../../components/CaseStudyShell";
 import ImageCarousel from "../../components/ImageCarousel";
 
 export const metadata = {
-  title: "Allowance Audit Tool | Nirav Saxena",
+  title: { absolute: "Case study: A quiet problem, hiding in plain sight" },
   description:
     "A one-week sprint that helped surface incorrectly paid allowances across the whole manager population.",
 };
