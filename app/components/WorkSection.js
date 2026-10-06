@@ -38,7 +38,7 @@ const CASE_STUDIES = [
     stats: [
       { num: "17", label: "growers" },
       { num: "3", label: "countries" },
-      { num: "497K+", label: "regional users" },
+      { num: "10", label: "feature areas" },
     ],
   },
 ];

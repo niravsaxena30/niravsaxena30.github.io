@@ -21,7 +21,7 @@ const STATS = [
   { num: "17", label: "growers" },
   { num: "3", label: "countries" },
   { num: "10", label: "feature areas tested" },
-  { num: "497K+", label: "regional users" },
+  { num: "10", label: "feature areas" },
 ];
 
 export default function CropwiseCaseStudy() {
@@ -250,19 +250,24 @@ export default function CropwiseCaseStudy() {
         <span className="section-tag">Outcome</span>
         <h2>Where things stand</h2>
         <p>
-          I can&apos;t draw a straight line from a specific finding to a
-          specific shipped change: that visibility wasn&apos;t part of the
-          engagement. What I do know: Cropwise Grower went on to launch across
-          these markets and reported strong regional adoption, and the agency
-          was invited back to run the same kind of study for farmers in
-          Vietnam, its own vote of confidence in the work.
+          What I found informed the designs, and the designs that shipped were{" "}
+          <span className="mark">almost identical</span> to the research-informed
+          versions. The larger experience stayed consistent with what the
+          research shaped.
+        </p>
+        <p>
+          The <span className="mark">contextualisation insight</span> became key
+          to the app&apos;s expansion. Apps across locations now showcase
+          markets, photos and crops based on local context. The agency was also
+          invited back to run the same kind of study for farmers in Vietnam.
         </p>
         <p className="proto-note">
-          Public reporting puts Cropwise Grower at roughly 497,000 registered
-          users across India, Pakistan, Indonesia, Bangladesh, Thailand, and
-          Malaysia as of August 2023, with adoption accelerating quickly in the
-          months prior (useful context, though not a metric this study can
-          claim direct credit for).
+          Context, not a claim: public reporting puts Cropwise Grower at roughly
+          497,000 registered users across India, Pakistan, Indonesia,
+          Bangladesh, Thailand, and Malaysia as of August 2023, with adoption
+          accelerating quickly in the months before. That&apos;s Syngenta&apos;s
+          reach rather than a result of this study, but it&apos;s the scale that
+          the research-informed experience now serves.
         </p>
       </section>
 
