@@ -5,13 +5,19 @@ import { createPortal } from "react-dom";
 
 const ZOOM_SCALE = 2.5;
 
-export default function Lightbox({ src, alt, className }) {
+// With no children, renders a plain <img> thumbnail. With children, renders
+// them inside a button as the trigger, and className goes on that button.
+export default function Lightbox({ src, alt, className, children, onOpenChange }) {
   const [open, setOpen] = useState(false);
   const [zoomed, setZoomed] = useState(false);
   const [origin, setOrigin] = useState("50% 50%");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    onOpenChange?.(open);
+  }, [open, onOpenChange]);
 
   useEffect(() => {
     if (!open) return;
@@ -50,12 +56,22 @@ export default function Lightbox({ src, alt, className }) {
 
   return (
     <>
-      <img
-        src={src}
-        alt={alt}
-        className={className}
-        onClick={() => setOpen(true)}
-      />
+      {children ? (
+        <button
+          type="button"
+          className={["lightbox-trigger", className].filter(Boolean).join(" ")}
+          onClick={() => setOpen(true)}
+        >
+          {children}
+        </button>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className={className}
+          onClick={() => setOpen(true)}
+        />
+      )}
       {open &&
         mounted &&
         createPortal(

@@ -1,4 +1,5 @@
 import CaseStudyShell from "../../components/CaseStudyShell";
+import ImageCarousel from "../../components/ImageCarousel";
 
 export const metadata = {
   title: "Allowance Audit Tool | Nirav Saxena",
@@ -20,6 +21,35 @@ const STATS = [
   { num: "700+", label: "managers" },
   { num: "94%", label: "coverage" },
   { num: "£500K+", label: "savings found" },
+];
+
+// Captions are placeholders.
+const SCREENSHOTS = [
+  {
+    src: "/allowance-audit/aat-01.png",
+    alt: "The review screen before any decisions: a three-step guide, a review progress bar at 0%, and a table of six allowance rows with empty decision dropdowns, comment fields, Pending statuses and a disabled Submit review button.",
+    caption: "Review screen",
+  },
+  {
+    src: "/allowance-audit/aat-02.png",
+    alt: "The same review table with a blue information banner under one colleague's row, stating the allowance will be removed from their pay from June onwards.",
+    caption: "Inline guidance when a decision is made",
+  },
+  {
+    src: "/allowance-audit/aat-03.png",
+    alt: "A dialog over the dimmed review screen asking \"Are you sure you want to submit?\", with notes on allowance removal and change, and Go back and Yes, submit buttons.",
+    caption: "Confirm before submitting",
+  },
+  {
+    src: "/allowance-audit/aat-04.png",
+    alt: "A dialog over the dimmed review screen with a green check icon and the heading \"Submission successful\", plus a Close button.",
+    caption: "Submission confirmed",
+  },
+  {
+    src: "/allowance-audit/aat-05.png",
+    alt: "The full review page after submission, with all six colleagues marked Completed and the Submit button replaced by a locked Submitted state.",
+    caption: "Full page overview",
+  },
 ];
 
 export default function AllowanceAuditCaseStudy() {
@@ -139,12 +169,11 @@ export default function AllowanceAuditCaseStudy() {
           through, closing with a clear success state so managers knew the audit
           had actually registered.
         </p>
-        <p className="proto-note">
-          Recreated screenshots of the review table and the submission
-          confirmation step, the two moments that carry the most design intent,
-          will sit here once exported at high enough resolution from the
-          original PDF.
-        </p>
+        <ImageCarousel
+          label="Allowance Audit Tool screenshots"
+          slides={SCREENSHOTS}
+          aspectRatio="1912 / 1296"
+        />
       </section>
 
       <section className="case-section" id="impact">
