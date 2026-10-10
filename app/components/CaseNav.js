@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+import { RESUME_URL } from "../../lib/constants";
 
 export default function CaseNav() {
   return (
@@ -10,7 +11,7 @@ export default function CaseNav() {
         </Link>
         <div className="nav-links">
           <a
-            href="https://drive.google.com/file/d/1VTE9hbjka_RwUZ2jNWVoH0MYhhkaV3Rc/view?usp=drive_link"
+            href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
+import { RESUME_URL } from "../../lib/constants";
 
 const SECTIONS = [
   { id: "top", label: "About me" },
@@ -82,7 +83,7 @@ export default function Nav() {
             </a>
           ))}
           <a
-            href="https://drive.google.com/file/d/1VTE9hbjka_RwUZ2jNWVoH0MYhhkaV3Rc/view?usp=drive_link"
+            href={RESUME_URL}
             className="nav-resume"
             target="_blank"
             rel="noopener noreferrer"

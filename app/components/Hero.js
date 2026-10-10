@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { RESUME_URL } from "../../lib/constants";
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -40,7 +41,7 @@ export default function Hero() {
               View my work
             </a>
             <a
-              href="https://drive.google.com/file/d/1VTE9hbjka_RwUZ2jNWVoH0MYhhkaV3Rc/view?usp=drive_link"
+              href={RESUME_URL}
               className="btn btn-ghost"
               target="_blank"
               rel="noopener noreferrer"
