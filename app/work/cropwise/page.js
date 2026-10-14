@@ -43,7 +43,6 @@ const STATS = [
   { num: "17", label: "growers" },
   { num: "3", label: "countries" },
   { num: "10", label: "feature areas tested" },
-  { num: "10", label: "feature areas" },
 ];
 
 export default function CropwiseCaseStudy() {
