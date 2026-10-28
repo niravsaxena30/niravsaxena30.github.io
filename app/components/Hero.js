@@ -23,18 +23,14 @@ export default function Hero() {
         <div className="hero-content">
           <h1 className="name">Nirav Saxena</h1>
           <p className="hero-primary">
-            I&apos;m a professional over-thinker who turns coffee into{" "}
+            I&apos;m a UX researcher who turns coffee into{" "}
             <span className="mark">user insights</span> and random observations into{" "}
-            <span className="mark">research hypotheses</span>. I love diving deep into
-            user behavior, but equally excited to chat about why we all have 200 apps
-            but only use 5, or whether dark mode actually saves your eyes or just makes
-            you feel cooler.
+            <span className="mark">research hypotheses</span>.
           </p>
           <p className="hero-secondary">
-            My job title however has been of a UX researcher for the past 4+
-            years. I blend my understanding of human behavior and my
-            connection-building skills to uncover meaningful insights that drive
-            product decisions.
+            5+ years blending my understanding of human behavior and
+            connection-building to uncover insights that drive product
+            decisions.
           </p>
           <div className="hero-cta">
             <a href="#work" className="btn btn-primary">
@@ -57,27 +53,10 @@ export default function Hero() {
               src="/hero-photo.jpg"
               alt="Photo of Nirav Saxena"
               fill
-              sizes="280px"
-              style={{ objectFit: "cover" }}
+              sizes="300px"
+              style={{ objectFit: "cover", objectPosition: "center 30%" }}
               priority
             />
-          </div>
-          <div className="scroll-cue" aria-hidden="true">
-            <span className="scroll-cue-text">Scroll for more</span>
-            <svg
-              className="scroll-cue-arrow"
-              viewBox="0 0 80 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 12 L40 36 L72 12"
-                stroke="currentColor"
-                strokeWidth="8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
           </div>
         </div>
       </div>

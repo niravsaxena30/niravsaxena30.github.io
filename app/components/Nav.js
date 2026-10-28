@@ -14,7 +14,9 @@ const SECTIONS = [
 function scrollToSection(id, behavior) {
   const el = document.getElementById(id);
   if (!el) return;
-  window.scrollTo({ top: el.offsetTop, behavior });
+  // The hero sits below the sticky nav, so its offsetTop would stop short of the top.
+  const top = id === "top" ? 0 : el.offsetTop;
+  window.scrollTo({ top, behavior });
 }
 
 export default function Nav() {

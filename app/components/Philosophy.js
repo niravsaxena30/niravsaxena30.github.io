@@ -86,6 +86,11 @@ export default function Philosophy() {
           </div>
         ))}
       </div>
+      <p className="phil-closing">
+        Beyond the research itself, I&apos;m just as happy to talk about why we
+        all have 200 apps but only use 5, or whether dark mode actually saves
+        your eyes or just makes you feel cooler.
+      </p>
     </section>
   );
 }

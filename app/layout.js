@@ -17,7 +17,7 @@ const inter = Inter({
 
 const SITE_TITLE = "Nirav Saxena | UX Researcher";
 const SITE_DESCRIPTION =
-  "UX researcher with 4+ years of experience and a background in psychotherapy, blending human behavior insight with connection-building to drive product decisions.";
+  "UX researcher with 5+ years of experience and a background in psychotherapy, blending human behavior insight with connection-building to drive product decisions.";
 
 export const metadata = {
   metadataBase: new URL("https://niravsaxena.com"),
