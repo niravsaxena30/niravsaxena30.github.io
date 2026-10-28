@@ -9,6 +9,7 @@ html {
 }
 
 html[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #0A0A0A;
   --surface: #151512;
   --text: #F5F4EF;
@@ -21,6 +22,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
+  color-scheme: light;
   --bg: #FAFAF9;
   --surface: #FFFFFF;
   --text: #14141A;

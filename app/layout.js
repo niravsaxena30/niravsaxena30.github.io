@@ -39,12 +39,44 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  colorScheme: "dark light",
+};
+
+// Runs before first paint. A saved manual choice always wins; otherwise the
+// device theme is used (dark if matchMedia is unavailable). With no saved
+// choice it also follows live device changes, until the visitor uses the toggle.
 const THEME_INIT_SCRIPT = `(function () {
+  var root = document.documentElement;
+  function stored() {
+    try {
+      var t = localStorage.getItem('theme');
+      return t === 'light' || t === 'dark' ? t : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  var mq = null;
   try {
-    var stored = localStorage.getItem('theme');
-    var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
+    mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
   } catch (e) {}
+  function system() {
+    return mq ? (mq.matches ? 'dark' : 'light') : 'dark';
+  }
+  var applied = stored() || system();
+  root.setAttribute('data-theme', applied);
+  if (!mq || stored()) return;
+  function follow() {
+    if (stored() || root.getAttribute('data-theme') !== applied) {
+      if (mq.removeEventListener) mq.removeEventListener('change', follow);
+      else mq.removeListener(follow);
+      return;
+    }
+    applied = system();
+    root.setAttribute('data-theme', applied);
+  }
+  if (mq.addEventListener) mq.addEventListener('change', follow);
+  else mq.addListener(follow);
 })();`;
 
 export default function RootLayout({ children }) {
